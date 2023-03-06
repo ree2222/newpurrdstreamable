@@ -12,9 +12,9 @@ local Players, Client, Mouse, RS, Camera =
 local Circle       = Drawing.new("Circle")
 local TracerCircle = Drawing.new("Circle")
 
-Circle.Color           = Color3.new(1,1,1)
+Circle.Color           = Color3.new(67, 121, 145)
 Circle.Thickness       = 1
-TracerCircle.Color     = Color3.new(1,1,1)
+TracerCircle.Color     = Color3.new(67, 121, 145)
 TracerCircle.Thickness = 1
 
 local UpdateFOV = function ()
