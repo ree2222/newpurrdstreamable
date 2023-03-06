@@ -21,12 +21,12 @@ local UpdateFOV = function ()
     if (not Circle and not TracerCircle) then
         return Circle and TracerCircle
     end
-    TracerCircle.Visible  = getgenv().SplittaW.TracerFOV.Visible
-    TracerCircle.Radius   = getgenv().SplittaW.TracerFOV.Radius * 3
+    TracerCircle.Visible  = getgenv().Purd.TracerFOV.Visible
+    TracerCircle.Radius   = getgenv().Purd.TracerFOV.Radius * 3
     TracerCircle.Position = Vector2.new(Mouse.X, Mouse.Y + (game:GetService("GuiService"):GetGuiInset().Y))
     
-    Circle.Visible  = getgenv().SplittaW.SilentFOV.Visible
-    Circle.Radius   = getgenv().SplittaW.SilentFOV.Radius * 3
+    Circle.Visible  = getgenv().Purd.SilentFOV.Visible
+    Circle.Radius   = getgenv().Purd.SilentFOV.Radius * 3
     Circle.Position = Vector2.new(Mouse.X, Mouse.Y + (game:GetService("GuiService"):GetGuiInset().Y))
     return Circle and TracerCircle
 end
@@ -211,15 +211,15 @@ Mouse.KeyDown:Connect(function(Key)
 
 
 Mouse.KeyDown:Connect(function(Key)
-    local Keybind = getgenv().SplittaW.Both.UnderGroundKey:lower()
-    if (Key == Keybind) and getgenv().SplittaW.Both.UseUnderGroundKeybind == true then
-            if getgenv().SplittaW.Both.UnderGroundReolver == true then
-				getgenv().SplittaW.Both.UnderGroundReolver = false
-                if getgenv().SplittaW.Both.SendNotification then
+    local Keybind = getgenv().Purd.Both.UnderGroundKey:lower()
+    if (Key == Keybind) and getgenv().Purd.Both.UseUnderGroundKeybind == true then
+            if getgenv().Purd.Both.UnderGroundReolver == true then
+				getgenv().Purd.Both.UnderGroundReolver = false
+                if getgenv().Purd.Both.SendNotification then
                     game.StarterGui:SetCore(
                         "SendNotification",
                         {
-                            Title = "SplittaW",
+                            Title = "Purd",
                             Text = "Disabled UnderGround Resolver",
                             Icon = "",
                             Duration = 1
@@ -227,12 +227,12 @@ Mouse.KeyDown:Connect(function(Key)
                     )
                 end
             else
-				getgenv().SplittaW.Both.UnderGroundReolver = true
-                if getgenv().SplittaW.Both.SendNotification then
+				getgenv().Purd.Both.UnderGroundReolver = true
+                if getgenv().Purd.Both.SendNotification then
                     game.StarterGui:SetCore(
                         "SendNotification",
                         {
-                            Title = "SplittaW",
+                            Title = "Purd",
                             Text = "Enabled UnderGround Resolver",
                             Icon = "",
                             Duration = 1
@@ -245,15 +245,15 @@ Mouse.KeyDown:Connect(function(Key)
 )
 
 Mouse.KeyDown:Connect(function(Key)
-    local Keybind = getgenv().SplittaW.Both.DetectDesyncKey:lower()
-    if (Key == Keybind) and getgenv().SplittaW.Both.UsDetectDesyncKeybind == true then
-            if getgenv().SplittaW.Both.DetectDesync == true then
-				getgenv().SplittaW.Both.DetectDesync = false
-                if getgenv().SplittaW.Both.SendNotification then
+    local Keybind = getgenv().Purd.Both.DetectDesyncKey:lower()
+    if (Key == Keybind) and getgenv().Purd.Both.UsDetectDesyncKeybind == true then
+            if getgenv().Purd.Both.DetectDesync == true then
+				getgenv().Purd.Both.DetectDesync = false
+                if getgenv().Purd.Both.SendNotification then
                     game.StarterGui:SetCore(
                         "SendNotification",
                         {
-                            Title = "SplittaW",
+                            Title = "Purd",
                             Text = "Disabled Desync Resolver",
                             Icon = "",
                             Duration = 1
@@ -261,12 +261,12 @@ Mouse.KeyDown:Connect(function(Key)
                     )
                 end
             else
-				getgenv().SplittaW.Both.DetectDesync = true
-                if getgenv().SplittaW.Both.SendNotification then
+				getgenv().Purd.Both.DetectDesync = true
+                if getgenv().Purd.Both.SendNotification then
                     game.StarterGui:SetCore(
                         "SendNotification",
                         {
-                            Title = "SplittaW",
+                            Title = "Purd",
                             Text = "Enabled Desync Resolver",
                             Icon = "",
                             Duration = 1
@@ -283,15 +283,15 @@ local backupindex = grmt.__index
 setreadonly(grmt, false)
 
 grmt.__index = newcclosure(function(self, v)
-    if (getgenv().SplittaW.Silent.Enabled and Mouse and tostring(v) == "Hit") then
+    if (getgenv().Purd.Silent.Enabled and Mouse and tostring(v) == "Hit") then
         if Prey and Prey.Character then
-    		if getgenv().SplittaW.Silent.PredictMovement then
-    			local endpoint = game.Players[tostring(Prey)].Character[getgenv().SplittaW.Silent.Part].CFrame + (
-    				game.Players[tostring(Prey)].Character[getgenv().SplittaW.Silent.Part].Velocity * getgenv().SplittaW.Silent.PredictionVelocity
+    		if getgenv().Purd.Silent.PredictMovement then
+    			local endpoint = game.Players[tostring(Prey)].Character[getgenv().Purd.Silent.Part].CFrame + (
+    				game.Players[tostring(Prey)].Character[getgenv().Purd.Silent.Part].Velocity * getgenv().Purd.Silent.PredictionVelocity
     			)
     			return (tostring(v) == "Hit" and endpoint)
     		else
-    			local endpoint = game.Players[tostring(Prey)].Character[getgenv().SplittaW.Silent.Part].CFrame
+    			local endpoint = game.Players[tostring(Prey)].Character[getgenv().Purd.Silent.Part].CFrame
     			return (tostring(v) == "Hit" and endpoint)
     		end
         end
@@ -300,42 +300,42 @@ grmt.__index = newcclosure(function(self, v)
 end)
 
 RS.Heartbeat:Connect(function()
-	if getgenv().SplittaW.Silent.Enabled then
-	    if Prey and Prey.Character and Prey.Character:WaitForChild(getgenv().SplittaW.Silent.Part) then
-            if getgenv().SplittaW.Both.DetectDesync == true and Prey.Character:WaitForChild("HumanoidRootPart").Velocity.magnitude > getgenv().SplittaW.Both.DesyncDetection then            
+	if getgenv().Purd.Silent.Enabled then
+	    if Prey and Prey.Character and Prey.Character:WaitForChild(getgenv().Purd.Silent.Part) then
+            if getgenv().Purd.Both.DetectDesync == true and Prey.Character:WaitForChild("HumanoidRootPart").Velocity.magnitude > getgenv().Purd.Both.DesyncDetection then            
                 pcall(function()
-                    local TargetVel = Prey.Character[getgenv().SplittaW.Silent.Part]
+                    local TargetVel = Prey.Character[getgenv().Purd.Silent.Part]
                     TargetVel.Velocity = Vector3.new(0, 0, 0)
                     TargetVel.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
                 end)
             end
-            if getgenv().SplittaW.Silent.AntiGroundShots == true and Prey.Character:FindFirstChild("Humanoid") == Enum.HumanoidStateType.Freefall then
+            if getgenv().Purd.Silent.AntiGroundShots == true and Prey.Character:FindFirstChild("Humanoid") == Enum.HumanoidStateType.Freefall then
                 pcall(function()
-                    local TargetVelv5 = Prey.Character[getgenv().SplittaW.Silent.Part]
+                    local TargetVelv5 = Prey.Character[getgenv().Purd.Silent.Part]
                     TargetVelv5.Velocity = Vector3.new(TargetVelv5.Velocity.X, (TargetVelv5.Velocity.Y * 0.5), TargetVelv5.Velocity.Z)
                     TargetVelv5.AssemblyLinearVelocity = Vector3.new(TargetVelv5.Velocity.X, (TargetVelv5.Velocity.Y * 0.5), TargetVelv5.Velocity.Z)
                 end)
             end
-            if getgenv().SplittaW.Both.UnderGroundReolver == true then            
+            if getgenv().Purd.Both.UnderGroundReolver == true then            
                 pcall(function()
-                    local TargetVelv2 = Prey.Character[getgenv().SplittaW.Silent.Part]
+                    local TargetVelv2 = Prey.Character[getgenv().Purd.Silent.Part]
                     TargetVelv2.Velocity = Vector3.new(TargetVelv2.Velocity.X, 0, TargetVelv2.Velocity.Z)
                     TargetVelv2.AssemblyLinearVelocity = Vector3.new(TargetVelv2.Velocity.X, 0, TargetVelv2.Velocity.Z)
                 end)
             end
 	    end
 	end
-    if getgenv().SplittaW.Tracer.Enabled == true then
-        if getgenv().SplittaW.Both.DetectDesync == true and Plr and Plr.Character and Plr.Character:WaitForChild(getgenv().SplittaW.Tracer.Part) and Plr.Character:WaitForChild("HumanoidRootPart").Velocity.magnitude > getgenv().SplittaW.Both.DesyncDetection then
+    if getgenv().Purd.Tracer.Enabled == true then
+        if getgenv().Purd.Both.DetectDesync == true and Plr and Plr.Character and Plr.Character:WaitForChild(getgenv().Purd.Tracer.Part) and Plr.Character:WaitForChild("HumanoidRootPart").Velocity.magnitude > getgenv().Purd.Both.DesyncDetection then
             pcall(function()
-                local TargetVelv3 = Plr.Character[getgenv().SplittaW.Tracer.Part]
+                local TargetVelv3 = Plr.Character[getgenv().Purd.Tracer.Part]
                 TargetVelv3.Velocity = Vector3.new(0, 0, 0)
                 TargetVelv3.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
             end)
         end
-        if getgenv().SplittaW.Both.UnderGroundReolver == true and Plr and Plr.Character and Plr.Character:WaitForChild(getgenv().SplittaW.Tracer.Part)then
+        if getgenv().Purd.Both.UnderGroundReolver == true and Plr and Plr.Character and Plr.Character:WaitForChild(getgenv().Purd.Tracer.Part)then
             pcall(function()
-                local TargetVelv4 = Plr.Character[getgenv().SplittaW.Tracer.Part]
+                local TargetVelv4 = Plr.Character[getgenv().Purd.Tracer.Part]
                 TargetVelv4.Velocity = Vector3.new(TargetVelv4.Velocity.X, 0, TargetVelv4.Velocity.Z)
                 TargetVelv4.AssemblyLinearVelocity = Vector3.new(TargetVelv4.Velocity.X, 0, TargetVelv4.Velocity.Z)
             end)
@@ -344,8 +344,8 @@ RS.Heartbeat:Connect(function()
 end)
 
 RS.RenderStepped:Connect(function()
-	if getgenv().SplittaW.Silent.Enabled then
-        if getgenv().SplittaW.Silent.CheckIf_KO == true and Prey and Prey.Character then 
+	if getgenv().Purd.Silent.Enabled then
+        if getgenv().Purd.Silent.CheckIf_KO == true and Prey and Prey.Character then 
             local KOd = Prey.Character:WaitForChild("BodyEffects")["K.O"].Value
             local Grabbed = Prey.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil
             if KOd or Grabbed then
@@ -353,8 +353,8 @@ RS.RenderStepped:Connect(function()
             end
         end
 	end
-    if getgenv().SplittaW.Tracer.Enabled == true then
-        if getgenv().SplittaW.Tracer.CheckIf_KO == true and Plr and Plr.Character then 
+    if getgenv().Purd.Tracer.Enabled == true then
+        if getgenv().Purd.Tracer.CheckIf_KO == true and Plr and Plr.Character then 
             local KOd = Plr.Character:WaitForChild("BodyEffects")["K.O"].Value
             local Grabbed = Plr.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil
             if KOd or Grabbed then
@@ -362,19 +362,19 @@ RS.RenderStepped:Connect(function()
                 IsTargetting = false
             end
         end
-		if getgenv().SplittaW.Tracer.DisableTargetDeath == true and Plr and Plr.Character:FindFirstChild("Humanoid") then
+		if getgenv().Purd.Tracer.DisableTargetDeath == true and Plr and Plr.Character:FindFirstChild("Humanoid") then
 			if Plr.Character.Humanoid.health < 4 then
 				Plr = nil
 				IsTargetting = false
 			end
 		end
-		if getgenv().SplittaW.Tracer.DisableLocalDeath == true and Plr and Plr.Character:FindFirstChild("Humanoid") then
+		if getgenv().Purd.Tracer.DisableLocalDeath == true and Plr and Plr.Character:FindFirstChild("Humanoid") then
 			if Client.Character.Humanoid.health < 4 then
 				Plr = nil
 				IsTargetting = false
 			end
 		end
-        if getgenv().SplittaW.Tracer.DisableOutSideCircle == true and Plr and Plr.Character and Plr.Character:WaitForChild("HumanoidRootPart") then
+        if getgenv().Purd.Tracer.DisableOutSideCircle == true and Plr and Plr.Character and Plr.Character:WaitForChild("HumanoidRootPart") then
             if
             TracerCircle.Radius <
                 (Vector2.new(
@@ -386,31 +386,31 @@ RS.RenderStepped:Connect(function()
                 IsTargetting = false
             end
         end
-		if getgenv().SplittaW.Tracer.PredictMovement and Plr and Plr.Character and Plr.Character:FindFirstChild(getgenv().SplittaW.Tracer.Part) then
-			if getgenv().SplittaW.Tracer.UseShake then
-				local Main = CFrame.new(Camera.CFrame.p,Plr.Character[getgenv().SplittaW.Tracer.Part].Position + Plr.Character[getgenv().SplittaW.Tracer.Part].Velocity * getgenv().SplittaW.Tracer.PredictionVelocity +
+		if getgenv().Purd.Tracer.PredictMovement and Plr and Plr.Character and Plr.Character:FindFirstChild(getgenv().Purd.Tracer.Part) then
+			if getgenv().Purd.Tracer.UseShake then
+				local Main = CFrame.new(Camera.CFrame.p,Plr.Character[getgenv().Purd.Tracer.Part].Position + Plr.Character[getgenv().Purd.Tracer.Part].Velocity * getgenv().Purd.Tracer.PredictionVelocity +
 				Vector3.new(
-					math.random(-getgenv().SplittaW.Tracer.ShakeValue, getgenv().SplittaW.Tracer.ShakeValue),
-					math.random(-getgenv().SplittaW.Tracer.ShakeValue, getgenv().SplittaW.Tracer.ShakeValue),
-					math.random(-getgenv().SplittaW.Tracer.ShakeValue, getgenv().SplittaW.Tracer.ShakeValue)
+					math.random(-getgenv().Purd.Tracer.ShakeValue, getgenv().Purd.Tracer.ShakeValue),
+					math.random(-getgenv().Purd.Tracer.ShakeValue, getgenv().Purd.Tracer.ShakeValue),
+					math.random(-getgenv().Purd.Tracer.ShakeValue, getgenv().Purd.Tracer.ShakeValue)
 				) * 0.1)
-				Camera.CFrame = Camera.CFrame:Lerp(Main, getgenv().SplittaW.Tracer.Smoothness, Enum.EasingStyle.Elastic, Enum.EasingDirection.InOut, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+				Camera.CFrame = Camera.CFrame:Lerp(Main, getgenv().Purd.Tracer.Smoothness, Enum.EasingStyle.Elastic, Enum.EasingDirection.InOut, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
 			else
-    			local Main = CFrame.new(Camera.CFrame.p,Plr.Character[getgenv().SplittaW.Tracer.Part].Position + Plr.Character[getgenv().SplittaW.Tracer.Part].Velocity * getgenv().SplittaW.Tracer.PredictionVelocity)
-    			Camera.CFrame = Camera.CFrame:Lerp(Main, getgenv().SplittaW.Tracer.Smoothness, Enum.EasingStyle.Elastic, Enum.EasingDirection.InOut, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+    			local Main = CFrame.new(Camera.CFrame.p,Plr.Character[getgenv().Purd.Tracer.Part].Position + Plr.Character[getgenv().Purd.Tracer.Part].Velocity * getgenv().Purd.Tracer.PredictionVelocity)
+    			Camera.CFrame = Camera.CFrame:Lerp(Main, getgenv().Purd.Tracer.Smoothness, Enum.EasingStyle.Elastic, Enum.EasingDirection.InOut, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
 			end
-		elseif getgenv().SplittaW.Tracer.PredictMovement == false and Plr and Plr.Character and Plr.Character:FindFirstChild(getgenv().SplittaW.Tracer.Part) then
-			if getgenv().SplittaW.Tracer.UseShake then
-				local Main = CFrame.new(Camera.CFrame.p,Plr.Character[getgenv().SplittaW.Tracer.Part].Position +
+		elseif getgenv().Purd.Tracer.PredictMovement == false and Plr and Plr.Character and Plr.Character:FindFirstChild(getgenv().Purd.Tracer.Part) then
+			if getgenv().Purd.Tracer.UseShake then
+				local Main = CFrame.new(Camera.CFrame.p,Plr.Character[getgenv().Purd.Tracer.Part].Position +
 				Vector3.new(
-					math.random(-getgenv().SplittaW.Tracer.ShakeValue, getgenv().SplittaW.Tracer.ShakeValue),
-					math.random(-getgenv().SplittaW.Tracer.ShakeValue, getgenv().SplittaW.Tracer.ShakeValue),
-					math.random(-getgenv().SplittaW.Tracer.ShakeValue, getgenv().SplittaW.Tracer.ShakeValue)
+					math.random(-getgenv().Purd.Tracer.ShakeValue, getgenv().Purd.Tracer.ShakeValue),
+					math.random(-getgenv().Purd.Tracer.ShakeValue, getgenv().Purd.Tracer.ShakeValue),
+					math.random(-getgenv().Purd.Tracer.ShakeValue, getgenv().Purd.Tracer.ShakeValue)
 				) * 0.1)
-				Camera.CFrame = Camera.CFrame:Lerp(Main, getgenv().SplittaW.Tracer.Smoothness, Enum.EasingStyle.Elastic, Enum.EasingDirection.InOut, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+				Camera.CFrame = Camera.CFrame:Lerp(Main, getgenv().Purd.Tracer.Smoothness, Enum.EasingStyle.Elastic, Enum.EasingDirection.InOut, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
 		    else
-    			local Main = CFrame.new(Camera.CFrame.p,Plr.Character[getgenv().SplittaW.Tracer.Part].Position)
-    			Camera.CFrame = Camera.CFrame:Lerp(Main, getgenv().SplittaW.Tracer.Smoothness, Enum.EasingStyle.Elastic, Enum.EasingDirection.InOut, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+    			local Main = CFrame.new(Camera.CFrame.p,Plr.Character[getgenv().Purd.Tracer.Part].Position)
+    			Camera.CFrame = Camera.CFrame:Lerp(Main, getgenv().Purd.Tracer.Smoothness, Enum.EasingStyle.Elastic, Enum.EasingDirection.InOut, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
 		    end
 		end
 	end
@@ -418,17 +418,17 @@ end)
 
 task.spawn(function ()
     while task.wait() do
-    	if getgenv().SplittaW.Silent.Enabled then
+    	if getgenv().Purd.Silent.Enabled then
             Prey = ClosestPlrFromMouse()
     	end
         if Plr then
-            if getgenv().SplittaW.Tracer.Enabled and (Plr.Character) and getgenv().SplittaW.Tracer.ClosestPart then
-                getgenv().SplittaW.Tracer.Part = tostring(GetClosestBodyPartV2(Plr.Character))
+            if getgenv().Purd.Tracer.Enabled and (Plr.Character) and getgenv().Purd.Tracer.ClosestPart then
+                getgenv().Purd.Tracer.Part = tostring(GetClosestBodyPartV2(Plr.Character))
             end
         end
         if Prey then
-            if getgenv().SplittaW.Silent.Enabled and (Prey.Character) and getgenv().SplittaW.Silent.ClosestPart then
-                getgenv().SplittaW.Silent.Part = tostring(GetClosestBodyPart(Prey.Character))
+            if getgenv().Purd.Silent.Enabled and (Prey.Character) and getgenv().Purd.Silent.ClosestPart then
+                getgenv().Purd.Silent.Part = tostring(GetClosestBodyPart(Prey.Character))
             end
         end
     end
@@ -450,11 +450,11 @@ local Script = {Functions = {}}
     end
     RS.RenderStepped:Connect(function()
     if Script.Functions.getEquippedWeaponName() ~= nil then
-        local WeaponSettings = getgenv().SplittaW.GunFOV[Script.Functions.getEquippedWeaponName()]
-        if WeaponSettings ~= nil and getgenv().SplittaW.GunFOV.Enabled == true then
-            getgenv().SplittaW.SilentFOV.Radius = WeaponSettings.FOV
+        local WeaponSettings = getgenv().Purd.GunFOV[Script.Functions.getEquippedWeaponName()]
+        if WeaponSettings ~= nil and getgenv().Purd.GunFOV.Enabled == true then
+            getgenv().Purd.SilentFOV.Radius = WeaponSettings.FOV
         else
-            getgenv().SplittaW.SilentFOV.Radius = getgenv().SplittaW.SilentFOV.Radius
+            getgenv().Purd.SilentFOV.Radius = getgenv().Purd.SilentFOV.Radius
         end
     end
 end)
